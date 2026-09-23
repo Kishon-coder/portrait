@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink text-bone font-body antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  @apply bg-bronze/40 text-bone;
+}
+
+/* subtle paper-grain overlay used behind sections */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: var(--tw-bg-grain, none);
+}
+
+/* custom cursor (desktop only, see CustomCursor.jsx) */
+.custom-cursor-active {
+  cursor: none;
+}
+
+.custom-cursor-active a,
+.custom-cursor-active button {
+  cursor: none;
+}
+
+/* line-drawing animation used on the loading screen */
+.draw-line {
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  animation: draw 1.6s ease forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* thin custom scrollbar for the lightbox / mobile menu */
+.thin-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(184, 147, 95, 0.4);
+  border-radius: 999px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid theme('colors.bronze');
+  outline-offset: 3px;
+}
